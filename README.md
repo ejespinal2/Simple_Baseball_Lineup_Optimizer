@@ -1,7 +1,6 @@
 # Baseball Lineup Optimizer
 
-A Monte Carlo simulation tool for comparing the run-scoring potential of different batting lineups.
-
+A Monte Carlo simulation tool for comparing the run-scoring potential of different Lineups/Batting Orders.
 ---
 
 ## How It Works
@@ -27,8 +26,10 @@ Provide a single `.csv` file containing one row per player. The file must includ
 | `SF` | Sacrifice flies |
 | `SH` | Sacrifice hits (bunts) |
 | `CS` | Caught stealing *(include column even if all zeros)* |
+| `SB` | Stolen Base *(include column even if all zeros)* |
 
 Singles (`X1B`) and all per-PA rates are derived automatically from these columns — do not add them manually.
+Keep in mind if a player has 0 for any hitting stats, they will have a probability of 0 for that stat(Ex: 0 for X2B = 0% chance of doubles. Suggest adding 0.1)
 
 ---
 
@@ -63,3 +64,8 @@ The more similar two lineups are, the smaller the difference in mean runs will b
 ## Interpreting Results
 
 The script prints the mean runs per game for each lineup and runs a **two-sample t-test** to determine whether the difference is statistically significant. A p-value below your chosen `P_THRESHOLD` (default `0.05`) means the difference is unlikely to be due to random variation alone. A p-value above it means there is not enough evidence to conclude one lineup is meaningfully better than the other.
+
+---
+
+## The Future
+In the future, I am looking to add speed as a stat to help determine which players would actually go 1st to 3rd, 2nd to home, etc. I am also looking to add stolen bases during the sim and caught stealing as well. Lastly, I am looking to incorporate Sacrifice plays as well, depending on the situation(Example: If a batter hits a pop out to the outfield in 12% of their at-bats that result in outs, I want that to be incorporated that if their is a runner on 3rd there is a 12% chance that its a sac fly oppurtunity and use the speed stat and percentage of runner-advancement as previously mentioned to determine whether the runner tags and scores, tags and gets out, or doesn't tag at all.) More lengthy additions I hope to make are situational awareness, such as not tagging from 3rd with no outs when the number 2 batter is on-deck, and the runner is slow, and I hope to incorporate advanced stats as well. I hope you enjoy!
